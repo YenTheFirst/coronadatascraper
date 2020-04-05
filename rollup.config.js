@@ -6,6 +6,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import postcss from 'rollup-plugin-postcss';
 import postcssNested from 'postcss-nested';
 import postcssImport from 'postcss-import';
+import commonjs from 'rollup-plugin-commonjs';
 
 const prod = !process.env.ROLLUP_WATCH;
 
@@ -20,9 +21,11 @@ export default [
     plugins: [
       resolve(),
       json(),
+      commonjs(),
       !prod &&
         serve({
           contentBase: 'dist',
+          host: '0.0.0.0',
           port: 3000
         }),
       !prod && livereload({ watch: 'site' }),

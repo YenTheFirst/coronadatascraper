@@ -1,0 +1,8 @@
+import:
+  - https://www.nextzen.org/carto/refill-style/11/refill-style.zip
+  - https://www.nextzen.org/carto/refill-style/11/themes/color-blue.zip
+  - https://www.nextzen.org/carto/refill-style/11/themes/label-0.zip
+  - https://www.nextzen.org/carto/refill-style/11/themes/detail-0.zip
+
+global:
+  sdk_api_key: NaqqS33fTUmyQcvbuIUCKA

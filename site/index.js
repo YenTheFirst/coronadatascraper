@@ -5,7 +5,7 @@
 import '@adobe/focus-ring-polyfill';
 import './style.css';
 
-import showMap from './map.js';
+import showMap from './tangram_map.js';
 import showFile from './file.js';
 import showSources from './sources.js';
 import showCrossCheckReport from './crossCheckReport.js';

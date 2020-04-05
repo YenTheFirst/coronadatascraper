@@ -53,7 +53,9 @@
     "needle": "^2.3.3",
     "pdf2json": "^1.2.0",
     "puppeteer": "^2.1.1",
-    "yargs": "^15.3.1"
+    "yargs": "^15.3.1",
+    "leaflet": "^1.6.0",
+    "tangram": "^0.20.1"
   },
   "devDependencies": {
     "@architect/architect": "^6.3.2",
@@ -81,6 +83,7 @@
     "rollup-plugin-livereload": "^1.1.0",
     "rollup-plugin-postcss": "^2.5.0",
     "rollup-plugin-serve": "^1.0.1",
+    "rollup-plugin-commonjs": "^9.2.0",
     "tap-spec": "^5.0.0",
     "tape": "^4.13.2",
     "tape-spawn": "^1.4.2",
