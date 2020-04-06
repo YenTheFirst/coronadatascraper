@@ -14,15 +14,22 @@ scene:
 styles:
   dots-constant:
     base: polygons
-    mix: [generative-random]
+    mix: [generative-random, shapes-circle]
     shaders:
       defines:
-        TANGRAM_WORLD_POSITION_WRAP: false
+        # current strategy can get a bit janky at tile edges. TBD.
+        #TANGRAM_WORLD_POSITION_WRAP: false
+        CELL_SIZE: 100.0 #meters. should be well less than INTERNAL_WRAP_SIZE
+        COLOR1: vec3(1.00,1.00,1.00)
+        COLOR2: random3(minitile_num)
       blocks:
         color: |
-          vec2 world_wrap = mod( (v_world_position.xy + 20037508.3427892), (2.0*20037508.3427892));
-          vec2 minitile = floor(world_wrap/1000.0);
-          color.rgb = random3( minitile );
+          vec2 minitile = v_world_position.xy/CELL_SIZE;
+          minitile.x += 0.5 * step(1.0, mod(minitile.y, 2.0));
+          vec2 minitile_num = floor(minitile);
+          vec2 minitile_space = fract(minitile);
+
+          color.rgb = mix(COLOR1, random3(floor(minitile_num.xy)), circle(fract(minitile_space.xy), 0.5));
 
 layers:
   earth:
