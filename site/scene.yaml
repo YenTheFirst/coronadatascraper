@@ -21,7 +21,13 @@ styles:
         #TANGRAM_WORLD_POSITION_WRAP: false
         CELL_SIZE: 100.0 #meters. should be well less than INTERNAL_WRAP_SIZE
         COLOR1: vec3(1.00,1.00,1.00)
-        COLOR2: random3(minitile_num)
+      uniforms:
+        STOPS_AND_COLORS: [
+          0.75, 1.0, 1.0, 1.0,
+          0.9, 0.3, 0.6, 0.3,
+          0.95, 0.6, 0.3, 0.3,
+          1.0, 0.0, 0.0, 0.0]
+        NUM_STOPS: 4
       blocks:
         color: |
           vec2 minitile = v_world_position.xy/CELL_SIZE;
@@ -29,7 +35,15 @@ styles:
           vec2 minitile_num = floor(minitile);
           vec2 minitile_space = fract(minitile);
 
-          color.rgb = mix(COLOR1, random3(floor(minitile_num.xy)), circle(fract(minitile_space.xy), 0.5));
+          float v = random(floor(minitile_num.xy));
+          for (int i = 0; i < 16; i += 4) {
+            if (v <= STOPS_AND_COLORS[i]) {
+              color.rgb = vec3(STOPS_AND_COLORS[i+1], STOPS_AND_COLORS[i+2], STOPS_AND_COLORS[i+3]);
+              break;
+            }
+          }
+
+          color.rgb = mix(COLOR1, color.rgb, circle(fract(minitile_space.xy), 0.5));
 
 layers:
   earth:
