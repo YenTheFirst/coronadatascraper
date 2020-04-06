@@ -6,3 +6,34 @@ import:
 
 global:
   sdk_api_key: NaqqS33fTUmyQcvbuIUCKA
+
+scene:
+  background:
+    color: global.offwhite_color
+
+styles:
+  dots-constant:
+    base: polygons
+    mix: [generative-random]
+    shaders:
+      defines:
+        TANGRAM_WORLD_POSITION_WRAP: false
+      blocks:
+        color: |
+          vec2 world_wrap = mod( (v_world_position.xy + 20037508.3427892), (2.0*20037508.3427892));
+          vec2 minitile = floor(world_wrap/1000.0);
+          color.rgb = random3( minitile );
+
+layers:
+  earth:
+    draw:
+      polygons:
+        order: 0
+        style: dots-constant
+
+  water:
+    lakes:
+      draw:
+        polygons:
+          style: polygons
+
